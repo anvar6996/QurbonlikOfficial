@@ -74,7 +74,6 @@ class SheepsByKgFragment : Fragment(R.layout.fragment_sheeps_by_kg) {
                         listSheepsByKg
                     )
                     val fileUri: Uri = initiateSharing()
-                    fileUri.let { launchShareFileIntent(it) }
                     launchShareFileIntent(fileUri)
                 }
             } else {
