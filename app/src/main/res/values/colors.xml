@@ -7,4 +7,38 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="colorPrimary">#151F46</color>
+    <color name="colorPrimaryTransparent">#D9151F46</color>
+    <color name="colorPrimaryDark">#2E3F7F</color>
+    <color name="colorPrimaryVariant">#F3F7FA</color>
+    <color name="colorAccent">#2E3F7F</color>
+
+    <color name="greenMain">#158C68</color>
+    <color name="redMain">#C93535</color>
+    <color name="redDark">#D0021B</color>
+    <color name="redButton">#D80027</color>
+    <color name="errorColor">#D80027</color>
+    <color name="blueAlt">#0052CC</color>
+
+    <color name="placeholderColor">#C6CFD5</color>
+    <color name="acceptationStateNeedToAccept">#FBBC04</color>
+
+    <color name="stroke_color">#EEEEEE</color>
+    <color name="grey">#FAFAFA</color>
+    <color name="space_grey">#8A8A8A</color>
+
+
+    <color name="futureTripToday">#2E3F7F</color>
+    <color name="futureTripTomorrow">#5469BA</color>
+    <color name="futureTripProcess">#758EEE</color>
+    <color name="futureTripOther">#E0E3F0</color>
+
+    <color name="secondaryButtons">#AEB7C2</color>
+    <color name="iconsTint">#4285F4</color>
+
+    <color name="purpleGradientStart">#9C27B0</color>
+    <color name="purpleGradientEnd">#2962FF</color>
+
+    <color name="iconBlueLight">#4285F4</color>
 </resources>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <AutoCompleteTextView
+        android:id="@+id/search_badge"
+        android:layout_width="0dp"
+        android:layout_height="?android:actionBarSize"
+        android:layout_margin="20dp"
+        android:background="@drawable/background_input"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="15dp"
+        android:hint="Qo'y izlash"
+        android:paddingStart="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_badge"
+        tools:listitem="@layout/item_sheep_by_kg" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
