@@ -8,23 +8,25 @@ import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 import uz.univer.qurbonlikofficial.data.entity.SheepByHeadDataEntity
-import uz.univer.qurbonlikofficial.data.entity.SheepByKgDataEntity
 
 @Dao
 interface SheepByHeadDao {
-  @Query("SELECT * FROM sheepbyheaddataentity")
-  fun getSheeps(): Flow<List<SheepByHeadDataEntity>>
+    @Query("SELECT * FROM sheepbyheaddataentity")
+    fun getSheeps(): Flow<List<SheepByHeadDataEntity>>
 
-  @Query("SELECT * FROM SheepByHeadDataEntity WHERE id = :id")
-  suspend fun getSheepById(id: Long): SheepByHeadDataEntity
+    @Query("SELECT * FROM sheepbyheaddataentity WHERE SheepByHeadDataEntity.name LIKE :searchPattern  OR SheepByHeadDataEntity.phoneNumber LIKE :searchPattern  OR  SheepByHeadDataEntity.surname LIKE :searchPattern ")
+    fun searchUsers(searchPattern: String): Flow<List<SheepByHeadDataEntity>>
 
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
-  suspend fun insertSheep(sheepDataEntity: SheepByHeadDataEntity)
+    @Query("SELECT * FROM SheepByHeadDataEntity WHERE id = :id")
+    suspend fun getSheepById(id: Long): SheepByHeadDataEntity
 
-  @Update(onConflict = OnConflictStrategy.REPLACE)
-  suspend fun update(sheepDataEntity: SheepByHeadDataEntity)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSheep(sheepDataEntity: SheepByHeadDataEntity)
 
-  @Delete
-  suspend fun deleteSheep(sheepDataEntity: SheepByHeadDataEntity)
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun update(sheepDataEntity: SheepByHeadDataEntity)
+
+    @Delete
+    suspend fun deleteSheep(sheepDataEntity: SheepByHeadDataEntity)
 
 }

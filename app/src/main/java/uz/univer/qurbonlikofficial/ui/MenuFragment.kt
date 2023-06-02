@@ -3,6 +3,7 @@ package uz.univer.qurbonlikofficial.ui
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import uz.univer.qurbonlikofficial.R
@@ -16,11 +17,11 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
         super.onViewCreated(view, savedInstanceState)
 
         bindingProperty.btnByHead.setOnClickListener {
-
+          findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToSheepsByHeadFragment())
         }
 
         bindingProperty.btnByKg.setOnClickListener {
-
+            findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToSheepsByKgFragment())
         }
     }
 }

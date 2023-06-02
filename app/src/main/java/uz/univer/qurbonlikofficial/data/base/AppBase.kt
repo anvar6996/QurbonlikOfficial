@@ -8,15 +8,15 @@ import uz.univer.qurbonlikofficial.data.entity.SheepByHeadDataEntity
 import uz.univer.qurbonlikofficial.data.entity.SheepByKgDataEntity
 
 @Database(
-  [SheepByKgDataEntity::class, SheepByHeadDataEntity::class],
-  version = 1
+  entities = [SheepByKgDataEntity::class, SheepByHeadDataEntity::class],
+  version = 3
 )
 
 abstract class AppBase : RoomDatabase() {
   abstract fun getSheepByKgDao(): SheepByKgDao
   abstract fun getSheepByHeadDao(): SheepByHeadDao
-  companion object {
-    const val DATABASE_NAME = "Qurbonlik-Base-0.1"
-  }
 
+  companion object {
+    const val DATABASE_NAME = "Qurbonlik-Base-0.1.2"
+  }
 }

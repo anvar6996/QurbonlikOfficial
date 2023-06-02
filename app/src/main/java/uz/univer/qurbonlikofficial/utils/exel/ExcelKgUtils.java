@@ -22,7 +22,7 @@ import java.util.List;
 import uz.univer.qurbonlikofficial.data.entity.SheepByKgDataEntity;
 import uz.univer.qurbonlikofficial.data.model.SheepParametrs;
 
-public class ExcelUtils {
+public class ExcelKgUtils {
     public static final String TAG = "ExcelUtil";
     private static Cell cell;
     private static Sheet sheet;
@@ -47,10 +47,13 @@ public class ExcelUtils {
         setHeaderCellStyle();
 
         // Creating a New Sheet and Setting width for each column
-        sheet = workbook.createSheet(Constants.EXCEL_SHEET_NAME);
+        sheet = workbook.createSheet(Constants.EXCEL_SHEET_NAME_KG);
         sheet.setColumnWidth(0, (15 * 400));
         sheet.setColumnWidth(1, (15 * 400));
-
+        sheet.setColumnWidth(2, (15 * 400));
+        sheet.setColumnWidth(3, (15 * 400));
+        sheet.setColumnWidth(4, (15 * 400));
+        sheet.setColumnWidth(5, (15 * 400));
         setHeaderRow();
         fillDataIntoExcel(listSheepDataEntity);
         isWorkbookWrittenIntoStorage = storeExcelInStorage(context, fileName);
@@ -104,7 +107,7 @@ public class ExcelUtils {
             cell = rowData.createCell(4);
             cell.setCellValue(listSheepDataEntity.get(i).getPaidAmount());
             cell = rowData.createCell(5);
-            cell.setCellValue(listSheepDataEntity.get(i).getRemainingAmount());
+            cell.setCellValue(listSheepDataEntity.get(i).getDebt());
         }
     }
 

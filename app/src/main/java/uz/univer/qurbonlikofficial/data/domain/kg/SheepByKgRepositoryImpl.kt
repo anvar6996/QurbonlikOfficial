@@ -17,6 +17,10 @@ class SheepByKgRepositoryImpl @Inject constructor(private val dao: SheepByKgDao)
         return dao.getSheepById(id)
     }
 
+    override suspend fun search(query: String): Flow<List<SheepByKgDataEntity>> {
+        return dao.searchUsers("%${query}%")
+    }
+
     override suspend fun updateSheep(sheepDataEntity: SheepByKgDataEntity) {
         dao.update(sheepDataEntity)
     }

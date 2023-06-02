@@ -6,9 +6,4 @@ import dagger.hilt.android.AndroidEntryPoint
 import uz.univer.qurbonlikofficial.R
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        setContentView(R.layout.activity_main)
-        super.onCreate(savedInstanceState)
-    }
-}
+class MainActivity : AppCompatActivity(R.layout.activity_main)

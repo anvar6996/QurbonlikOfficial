@@ -40,6 +40,7 @@
                 android:gravity="start|center"
                 android:hint="Qo'y raqami"
                 android:imeOptions="actionGo"
+                android:inputType="number"
                 android:maxLines="1"
                 android:paddingStart="15dp"
                 android:textColor="@color/black"
@@ -89,6 +90,34 @@
 
 
             <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/surname"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="start|center"
+                android:hint="Xaridor familiyasi"
+                android:imeOptions="actionGo"
+                android:importantForAutofill="no"
+                android:maxLines="1"
+                android:paddingStart="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/space_grey"
+                android:textSize="19sp"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/background_input"
+            android:textColorHint="@color/space_grey"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp">
+
+
+            <com.vicmikhailau.maskededittext.MaskedEditText
                 android:id="@+id/phone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -96,7 +125,9 @@
                 android:hint="Xaridor telefon raqami"
                 android:imeOptions="actionGo"
                 android:importantForAutofill="no"
+                android:inputType="phone"
                 android:maxLines="1"
+                app:mask="+998 (##) ###-##-##"
                 android:paddingStart="15dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/space_grey"
@@ -124,6 +155,7 @@
                 android:hint="Qo'y o'girligi"
                 android:imeOptions="actionGo"
                 android:importantForAutofill="no"
+                android:inputType="number"
                 android:maxLines="1"
                 android:paddingStart="15dp"
                 android:textColor="@color/black"
@@ -151,6 +183,7 @@
                 android:hint="Qo'y narxi"
                 android:imeOptions="actionGo"
                 android:importantForAutofill="no"
+                android:inputType="number"
                 android:maxLines="1"
                 android:paddingStart="15dp"
                 android:textColor="@color/black"
@@ -165,7 +198,34 @@
             android:layout_height="?android:actionBarSize"
             android:layout_marginTop="15dp"
             android:background="@drawable/background_input"
+            android:textColorHint="@color/space_grey"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp">
 
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/paid_ammount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="start|center"
+                android:hint="To'langan summa"
+                android:imeOptions="actionGo"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLines="1"
+                android:paddingStart="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/space_grey"
+                android:textSize="19sp"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/background_input"
             android:textColorHint="@color/redDark"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp">
@@ -179,6 +239,7 @@
                 android:hint="Qarzi"
                 android:imeOptions="actionGo"
                 android:importantForAutofill="no"
+                android:inputType="number"
                 android:maxLines="1"
                 android:paddingStart="15dp"
                 android:textColor="@color/black"
@@ -188,12 +249,13 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_by_kg"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginTop="50dp"
             android:background="@drawable/bg_btn"
+            android:gravity="center"
             android:paddingHorizontal="25dp"
             android:text="Saqlash"
             android:textAllCaps="false"

@@ -5,10 +5,11 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class SheepByHeadDataEntity(
-    @PrimaryKey(autoGenerate = true) val id: Long,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
     val name: String,
     val surname: String,
     val phoneNumber: String,
     val price: String,
-    val remainingAmount: String,
+    val debt: Float,
 )

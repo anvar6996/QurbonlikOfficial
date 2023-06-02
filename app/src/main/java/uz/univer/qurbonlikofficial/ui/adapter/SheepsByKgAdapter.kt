@@ -31,7 +31,9 @@ class SheepsByKgAdapter : ListAdapter<SheepByKgDataEntity, SheepsByKgAdapter.Emp
 
         fun bind(data: SheepByKgDataEntity) = binding.apply {
             binding.name.text = data.name.ifEmpty { "" }
+            binding.number.text = data.sheepNumber.ifEmpty { "" }
             binding.phone.text = data.phoneNumber
+            binding.indicator.setImageResource(if (data.debt == 0.0f) R.drawable.bg_paid else R.drawable.bg_debt)
         }
     }
 

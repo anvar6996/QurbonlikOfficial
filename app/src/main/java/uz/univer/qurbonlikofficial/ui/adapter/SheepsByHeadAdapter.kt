@@ -33,6 +33,7 @@ class SheepsByHeadAdapter :
         fun bind(data: SheepByHeadDataEntity) = binding.apply {
             binding.name.text = data.name.ifEmpty { "" }
             binding.phone.text = data.phoneNumber
+            binding.indicator.setImageResource(if (data.debt == 0.0f) R.drawable.bg_paid else R.drawable.bg_debt)
         }
     }
 

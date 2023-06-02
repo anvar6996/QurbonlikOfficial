@@ -43,11 +43,26 @@ class MainViewModel @Inject constructor(
             }.launchIn(viewModelScope)
         }
     }
-
     fun getAllSheepByHead() {
         viewModelScope.launch {
             repositoryHead.getAllSheeps().onEach {
                 flowSheepsByHead.emit(it)
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    fun searchSheepsByHead(query: String) {
+        viewModelScope.launch {
+            repositoryHead.search(query).onEach {
+                flowSheepsByHead.emit(it)
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    fun searchSheepsByKg(query: String) {
+        viewModelScope.launch {
+            repositoryKg.search(query = query).onEach {
+                flowSheepsByKg.emit(it)
             }.launchIn(viewModelScope)
         }
     }
