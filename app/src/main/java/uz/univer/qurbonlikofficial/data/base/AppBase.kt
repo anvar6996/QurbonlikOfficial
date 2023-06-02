@@ -2,6 +2,7 @@ package uz.univer.qurbonlikofficial.data.base
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import uz.univer.qurbonlikofficial.data.dao.SheepByHeadDao
 import uz.univer.qurbonlikofficial.data.dao.SheepByKgDao
 import uz.univer.qurbonlikofficial.data.entity.SheepByHeadDataEntity
 import uz.univer.qurbonlikofficial.data.entity.SheepByKgDataEntity
@@ -12,7 +13,8 @@ import uz.univer.qurbonlikofficial.data.entity.SheepByKgDataEntity
 )
 
 abstract class AppBase : RoomDatabase() {
-  abstract fun getSheepDao(): SheepByKgDao
+  abstract fun getSheepByKgDao(): SheepByKgDao
+  abstract fun getSheepByHeadDao(): SheepByHeadDao
   companion object {
     const val DATABASE_NAME = "Qurbonlik-Base-0.1"
   }

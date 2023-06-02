@@ -8,6 +8,8 @@ import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 import uz.univer.qurbonlikofficial.data.entity.SheepByKgDataEntity
+import javax.inject.Inject
+
 
 @Dao
 interface SheepByKgDao {
