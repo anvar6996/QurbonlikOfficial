@@ -40,12 +40,22 @@ class SheepsByHeadFragment : Fragment(R.layout.fragment_sheeps_by_head) {
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
         if (checkWriteFilePermissionGranted()) {
-            Toast.makeText(
-                requireContext(), "Xotiradan foydalanishga ruxsat berildi", Toast.LENGTH_SHORT
-            ).show()
+            if (listSheepsByHead.isNotEmpty()) {
+                ExcelHeadUtils.exportDataIntoWorkbook(
+                    requireContext(),
+                    getCurrentDate() + getCurrentTime() + Constants.EXCEL_FILE_NAME_HEAD,
+                    listSheepsByHead
+                )
+                val fileUri: Uri = initiateSharing()
+                launchShareFileIntent(fileUri)
+            }else{
+                Toast.makeText(
+                    requireContext(), "Малумотлар йўқ", Toast.LENGTH_SHORT
+                ).show()
+            }
         } else {
             Toast.makeText(
-                requireContext(), "Xotiradan foydalanishga ruxsat berilmadi", Toast.LENGTH_SHORT
+                requireContext(), "Хотирадан фойдаланишга рухсат берилмади", Toast.LENGTH_SHORT
             ).show()
         }
     }
@@ -59,12 +69,6 @@ class SheepsByHeadFragment : Fragment(R.layout.fragment_sheeps_by_head) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getAllSheepByHead()
-        locationPermissionRequest.launch(
-            arrayOf(
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            )
-        )
         binding.upload.setOnClickListener {
             if (checkWriteFilePermissionGranted()) {
                 if (listSheepsByHead.isNotEmpty()) {
@@ -85,6 +89,11 @@ class SheepsByHeadFragment : Fragment(R.layout.fragment_sheeps_by_head) {
                 )
             }
         }
+        sheepsByHeadAdapter.itemClickListener {
+            val phone = "+${it.phoneNumber}"
+            val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null))
+            startActivity(intent)
+        }
 
         binding.recyclerSheep.adapter = sheepsByHeadAdapter
         viewModel.flowSheepsByHead.onEach {
@@ -97,6 +106,9 @@ class SheepsByHeadFragment : Fragment(R.layout.fragment_sheeps_by_head) {
         }
         binding.addSheep.setOnClickListener {
             findNavController().navigate(SheepsByHeadFragmentDirections.actionSheepsByHeadFragmentToAddSheepsByHeadFragment())
+        }
+        sheepsByHeadAdapter.itemDeleteListener {
+            viewModel.deleteByHeadSheep(it)
         }
     }
 

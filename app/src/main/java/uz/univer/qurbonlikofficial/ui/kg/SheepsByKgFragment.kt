@@ -40,12 +40,22 @@ class SheepsByKgFragment : Fragment(R.layout.fragment_sheeps_by_kg) {
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
         if (checkWriteFilePermissionGranted()) {
-            Toast.makeText(
-                requireContext(), "Xotiradan foydalanishga ruxsat berildi", Toast.LENGTH_SHORT
-            ).show()
+            if (listSheepsByKg.isNotEmpty()) {
+                ExcelKgUtils.exportDataIntoWorkbook(
+                    requireContext(),
+                    getCurrentDate() + getCurrentTime() + Constants.EXCEL_FILE_NAME_KG,
+                    listSheepsByKg
+                )
+                val fileUri: Uri = initiateSharing()
+                launchShareFileIntent(fileUri)
+            }else{
+                Toast.makeText(
+                    requireContext(), "Малумотлар йўқ", Toast.LENGTH_SHORT
+                ).show()
+            }
         } else {
             Toast.makeText(
-                requireContext(), "Xotiradan foydalanishga ruxsat berilmadi", Toast.LENGTH_SHORT
+                requireContext(), "Хотирадан фойдаланишга рухсат берилмади", Toast.LENGTH_SHORT
             ).show()
         }
     }
@@ -59,12 +69,6 @@ class SheepsByKgFragment : Fragment(R.layout.fragment_sheeps_by_kg) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getAllSheepByKg()
-        locationPermissionRequest.launch(
-            arrayOf(
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            )
-        )
         binding.upload.setOnClickListener {
             if (checkWriteFilePermissionGranted()) {
                 if (listSheepsByKg.isNotEmpty()) {
@@ -90,11 +94,20 @@ class SheepsByKgFragment : Fragment(R.layout.fragment_sheeps_by_kg) {
             sheepsByKgAdapter.submitList(it)
         }.launchIn(lifecycleScope)
 
+        sheepsByKgAdapter.itemClickListener {
+            val phone = "+${it.phoneNumber}"
+            val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null))
+            startActivity(intent)
+        }
         binding.searchBadge.addTextChangedListener {
             viewModel.searchSheepsByKg(it.toString())
         }
         binding.addSheep.setOnClickListener {
             findNavController().navigate(SheepsByKgFragmentDirections.actionSheepsByKgFragmentToAddSheepsByKgFragment())
+        }
+        sheepsByKgAdapter.itemDeleteListener {
+            viewModel.deleteByKgSheep(it)
+
         }
     }
 

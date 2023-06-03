@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="Oyoqlab sotiladigan qo'y malumotlarini kiritish"
+            android:text="Оёқлаб сотиладиган қўй малумотларини киритиш"
             android:textColor="@color/black"
             android:textSize="23sp" />
 
@@ -37,9 +37,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="start|center"
-                android:hint="Qo'y raqami"
+                android:hint="Қўй рақами"
                 android:imeOptions="actionGo"
                 android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:paddingStart="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/space_grey"
+                android:textSize="19sp"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/background_input"
+            android:textColorHint="@color/space_grey"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp">
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="start|center"
+                android:hint="Харидор исми"
+                android:imeOptions="actionGo"
+                android:importantForAutofill="no"
                 android:maxLines="1"
                 android:paddingStart="15dp"
                 android:textColor="@color/black"
@@ -65,34 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="start|center"
-                android:hint="Xaridor familiyasi"
-                android:imeOptions="actionGo"
-                android:importantForAutofill="no"
-                android:maxLines="1"
-                android:paddingStart="15dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/space_grey"
-                android:textSize="19sp"
-                tools:ignore="LabelFor" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="?android:actionBarSize"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/background_input"
-            android:textColorHint="@color/space_grey"
-            app:boxStrokeWidth="0dp"
-            app:boxStrokeWidthFocused="0dp">
-
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="start|center"
-                android:hint="Xaridor ismi"
+                android:hint="Харидор фамилияси"
                 android:imeOptions="actionGo"
                 android:importantForAutofill="no"
                 android:maxLines="1"
@@ -120,7 +120,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="start|center"
-                android:hint="Xaridor telefon raqami"
+                android:hint="Харидор телефон рақами"
                 android:imeOptions="actionGo"
                 android:importantForAutofill="no"
                 android:inputType="phone"
@@ -149,7 +149,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="start|center"
-                android:hint="Qo'y narxi"
+                android:hint="Қўй нархи"
                 android:imeOptions="actionGo"
                 android:importantForAutofill="no"
                 android:inputType="number"
@@ -178,7 +178,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="start|center"
-                android:hint="Qarzi"
+                android:hint="Қарзи"
                 android:imeOptions="actionGo"
                 android:importantForAutofill="no"
                 android:inputType="number"
@@ -199,7 +199,7 @@
             android:background="@drawable/bg_btn"
             android:gravity="center"
             android:paddingHorizontal="25dp"
-            android:text="Saqlash"
+            android:text="Сақлаш"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="17sp"

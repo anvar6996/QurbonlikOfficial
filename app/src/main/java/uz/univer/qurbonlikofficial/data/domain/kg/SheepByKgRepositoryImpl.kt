@@ -10,7 +10,7 @@ import javax.inject.Inject
 class SheepByKgRepositoryImpl @Inject constructor(private val dao: SheepByKgDao) :
     SheepByKgRepository {
   override fun getAllSheeps(): Flow<List<SheepByKgDataEntity>> {
-        return dao.getSheeps()
+        return dao.getSheeps("debt")
     }
 
     override suspend fun getSheep(id: Long): SheepByKgDataEntity {

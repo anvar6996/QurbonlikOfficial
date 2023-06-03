@@ -11,8 +11,8 @@ import uz.univer.qurbonlikofficial.data.entity.SheepByHeadDataEntity
 
 @Dao
 interface SheepByHeadDao {
-    @Query("SELECT * FROM sheepbyheaddataentity")
-    fun getSheeps(): Flow<List<SheepByHeadDataEntity>>
+    @Query("SELECT * FROM sheepbyheaddataentity  ORDER BY :columnName ASC")
+    fun getSheeps(columnName:String): Flow<List<SheepByHeadDataEntity>>
 
     @Query("SELECT * FROM sheepbyheaddataentity WHERE SheepByHeadDataEntity.name LIKE :searchPattern  OR SheepByHeadDataEntity.phoneNumber LIKE :searchPattern  OR  SheepByHeadDataEntity.surname LIKE :searchPattern ")
     fun searchUsers(searchPattern: String): Flow<List<SheepByHeadDataEntity>>

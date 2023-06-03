@@ -29,23 +29,24 @@ class AddSheepsByHeadFragment : Fragment(R.layout.fragment_add_sheep_by_head) {
     private fun saveSheep() {
         binding.apply {
             if (name.text.toString().isEmpty()) {
-                name.setError("Xaridor ismini kiriting!")
+                name.setError("Харидор исмини киритинг!")
                 return
             }
             if (surname.text.toString().isEmpty()) {
-                name.setError("Xaridor familiyasini kiriting!")
+                name.setError("Харидор фамилиясини киритинг!")
                 return
             }
             if (phone.unMaskedText.toString().length == 7) {
-                name.setError("Xaridor telefon raqamini kiriting!")
+                name.setError("Харидор телефон рақамини киритинг!")
                 return
             }
             if (sheepNumber.text.toString().isEmpty()) {
-                name.setError("Qo'y raqamini kiriting!")
+                name.setError("Қўй рақамини киритинг!")
                 return
             }
+
             if (sheepCost.text.toString().isEmpty()) {
-                name.setError("Qo'y narxini kiriting!")
+                name.setError("Қўй нархини киритинг!")
                 return
             }
             if (debt.text.toString().isEmpty()) {

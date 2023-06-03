@@ -1,5 +1,6 @@
 package uz.univer.qurbonlikofficial.ui.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,11 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import uz.univer.qurbonlikofficial.R
 import uz.univer.qurbonlikofficial.data.entity.SheepByHeadDataEntity
 import uz.univer.qurbonlikofficial.databinding.ItemSheepByHeadBinding
+import java.text.NumberFormat
+import java.util.Locale
 
 
 class SheepsByHeadAdapter :
     ListAdapter<SheepByHeadDataEntity, SheepsByHeadAdapter.EmployeeHolder>(Diff) {
-
+    private var clickDelete: ((SheepByHeadDataEntity) -> Unit)? = null
     private var clickListener: ((SheepByHeadDataEntity) -> Unit)? = null
     private var longClickListener: ((SheepByHeadDataEntity, Int, View) -> Unit)? = null
 
@@ -21,7 +24,6 @@ class SheepsByHeadAdapter :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
-            binding.root.setOnClickListener { clickListener?.invoke(getItem(bindingAdapterPosition)) }
             binding.root.setOnLongClickListener {
                 longClickListener?.invoke(
                     getItem(bindingAdapterPosition), bindingAdapterPosition, binding.root
@@ -34,6 +36,18 @@ class SheepsByHeadAdapter :
             binding.name.text = data.name.ifEmpty { "" }
             binding.phone.text = data.phoneNumber
             binding.indicator.setImageResource(if (data.debt == 0.0f) R.drawable.bg_paid else R.drawable.bg_debt)
+            binding.delete.setOnClickListener {
+                clickDelete?.invoke(data)
+                notifyItemRemoved(absoluteAdapterPosition)
+            }
+            binding.call.setOnClickListener {
+                clickListener?.invoke(data)
+            }
+            val formattedNumber =
+                NumberFormat.getNumberInstance(Locale.getDefault()).format(data.debt)
+            binding.debt.text = "Қарз:${formattedNumber} сўм"
+
+            binding.debt.setTextColor(if (data.debt == 0.0f) Color.parseColor("#158C68") else Color.parseColor("#D0021B"))
         }
     }
 
@@ -67,6 +81,10 @@ class SheepsByHeadAdapter :
 
     fun itemClickListener(f: (SheepByHeadDataEntity) -> Unit) {
         clickListener = f
+    }
+
+    fun itemDeleteListener(f: (SheepByHeadDataEntity) -> Unit) {
+        clickDelete = f
     }
 
     fun itemLongClickListener(f: (SheepByHeadDataEntity, Int, View) -> Unit) {
