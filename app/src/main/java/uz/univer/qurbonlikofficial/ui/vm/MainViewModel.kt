@@ -36,6 +36,18 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun updateByKgSheep(sheepDataEntity: SheepByKgDataEntity) {
+        viewModelScope.launch {
+            repositoryKg.updateSheep(sheepDataEntity)
+        }
+    }
+
+    fun updateByHeadSheep(sheepDataEntity: SheepByHeadDataEntity) {
+        viewModelScope.launch {
+            repositoryHead.updateSheep(sheepDataEntity)
+        }
+    }
+
     fun getAllSheepByKg() {
         viewModelScope.launch {
             repositoryKg.getAllSheeps().onEach {
@@ -43,6 +55,7 @@ class MainViewModel @Inject constructor(
             }.launchIn(viewModelScope)
         }
     }
+
     fun getAllSheepByHead() {
         viewModelScope.launch {
             repositoryHead.getAllSheeps().onEach {

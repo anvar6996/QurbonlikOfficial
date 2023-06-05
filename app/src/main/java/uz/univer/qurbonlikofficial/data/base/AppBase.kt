@@ -17,6 +17,6 @@ abstract class AppBase : RoomDatabase() {
   abstract fun getSheepByHeadDao(): SheepByHeadDao
 
   companion object {
-    const val DATABASE_NAME = "Qurbonlik-Base-0.1.2"
+    const val DATABASE_NAME = "Qurbonlik-Base-0.1.3"
   }
 }

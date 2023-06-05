@@ -21,6 +21,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import uz.univer.qurbonlikofficial.R
 import uz.univer.qurbonlikofficial.data.entity.SheepByHeadDataEntity
+import uz.univer.qurbonlikofficial.data.model.StaticValues
 import uz.univer.qurbonlikofficial.databinding.FragmentSheepsByHeadBinding
 import uz.univer.qurbonlikofficial.ui.adapter.SheepsByHeadAdapter
 import uz.univer.qurbonlikofficial.ui.vm.MainViewModel
@@ -109,6 +110,10 @@ class SheepsByHeadFragment : Fragment(R.layout.fragment_sheeps_by_head) {
         }
         sheepsByHeadAdapter.itemDeleteListener {
             viewModel.deleteByHeadSheep(it)
+        }
+        sheepsByHeadAdapter.itemClickOpenListener {
+            StaticValues.sheepByHeadDataEntity=it
+            findNavController().navigate(SheepsByHeadFragmentDirections.actionSheepsByHeadFragmentToEditSheepsByHeadFragment())
         }
     }
 

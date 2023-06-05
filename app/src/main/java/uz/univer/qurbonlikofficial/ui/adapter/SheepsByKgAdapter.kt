@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import uz.univer.qurbonlikofficial.R
+import uz.univer.qurbonlikofficial.data.entity.SheepByHeadDataEntity
 import uz.univer.qurbonlikofficial.data.entity.SheepByKgDataEntity
 import uz.univer.qurbonlikofficial.databinding.ItemSheepByKgBinding
 import java.text.NumberFormat
@@ -19,6 +20,7 @@ class SheepsByKgAdapter : ListAdapter<SheepByKgDataEntity, SheepsByKgAdapter.Emp
     private var clickListener: ((SheepByKgDataEntity) -> Unit)? = null
     private var clickDelete: ((SheepByKgDataEntity) -> Unit)? = null
     private var longClickListener: ((SheepByKgDataEntity, Int, View) -> Unit)? = null
+    private var clickOpenListener: ((SheepByKgDataEntity) -> Unit)? = null
 
     inner class EmployeeHolder(private val binding: ItemSheepByKgBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -29,6 +31,11 @@ class SheepsByKgAdapter : ListAdapter<SheepByKgDataEntity, SheepsByKgAdapter.Emp
                     getItem(bindingAdapterPosition), bindingAdapterPosition, binding.root
                 )
                 return@setOnLongClickListener true
+            }
+            binding.root.setOnClickListener {
+                clickOpenListener?.invoke(
+                    getItem(bindingAdapterPosition)
+                )
             }
         }
 
@@ -84,6 +91,9 @@ class SheepsByKgAdapter : ListAdapter<SheepByKgDataEntity, SheepsByKgAdapter.Emp
         clickListener = f
     }
 
+    fun itemClickOpenListener(f: (SheepByKgDataEntity) -> Unit) {
+        clickOpenListener = f
+    }
     fun itemDeleteListener(f: (SheepByKgDataEntity) -> Unit) {
         clickDelete = f
     }

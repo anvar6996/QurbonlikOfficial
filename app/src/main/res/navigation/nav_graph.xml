@@ -8,9 +8,9 @@
 
     <fragment
         android:id="@+id/menuFragment"
-        tools:layout="@layout/fragment_menu"
         android:name="uz.univer.qurbonlikofficial.ui.MenuFragment"
-        android:label="MenuFragment">
+        android:label="MenuFragment"
+        tools:layout="@layout/fragment_menu">
         <action
             android:id="@+id/action_menuFragment_to_sheepsByHeadFragment"
             app:destination="@id/sheepsByHeadFragment" />
@@ -20,31 +20,47 @@
     </fragment>
     <fragment
         android:id="@+id/addSheepsByHeadFragment"
-        tools:layout="@layout/fragment_add_sheep_by_head"
         android:name="uz.univer.qurbonlikofficial.ui.head.AddSheepsByHeadFragment"
-        android:label="AddSheepsByHeadFragment" />
+        android:label="AddSheepsByHeadFragment"
+        tools:layout="@layout/fragment_add_sheep_by_head" />
     <fragment
-        tools:layout="@layout/fragment_add_sheep_by_kg"
         android:id="@+id/addSheepsByKgFragment"
         android:name="uz.univer.qurbonlikofficial.ui.kg.AddSheepsByKgFragment"
-        android:label="AddSheepsByKgFragment" />
+        android:label="AddSheepsByKgFragment"
+        tools:layout="@layout/fragment_add_sheep_by_kg" />
     <fragment
         android:id="@+id/sheepsByKgFragment"
-        tools:layout="@layout/fragment_sheeps_by_kg"
         android:name="uz.univer.qurbonlikofficial.ui.kg.SheepsByKgFragment"
-        android:label="SheepsByKgFragment">
+        android:label="SheepsByKgFragment"
+        tools:layout="@layout/fragment_sheeps_by_kg">
         <action
             android:id="@+id/action_sheepsByKgFragment_to_addSheepsByKgFragment"
             app:destination="@id/addSheepsByKgFragment" />
+        <action
+            android:id="@+id/action_sheepsByKgFragment_to_editSheepsByKgFragment"
+            app:destination="@id/editSheepsByKgFragment" />
     </fragment>
     <fragment
-        tools:layout="@layout/fragment_sheeps_by_head"
         android:id="@+id/sheepsByHeadFragment"
         android:name="uz.univer.qurbonlikofficial.ui.head.SheepsByHeadFragment"
-        android:label="SheepsByHeadFragment">
+        android:label="SheepsByHeadFragment"
+        tools:layout="@layout/fragment_sheeps_by_head">
         <action
             android:id="@+id/action_sheepsByHeadFragment_to_addSheepsByHeadFragment"
             app:destination="@id/addSheepsByHeadFragment" />
+        <action
+            android:id="@+id/action_sheepsByHeadFragment_to_editSheepsByHeadFragment"
+            app:destination="@id/editSheepsByHeadFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/editSheepsByHeadFragment"
+        android:name="uz.univer.qurbonlikofficial.ui.head.EditSheepsByHeadFragment"
+        android:label="EditSheepsByHeadFragment"
+        tools:layout="@layout/fragment_add_sheep_by_head" />
+    <fragment
+        android:id="@+id/editSheepsByKgFragment"
+        android:name="uz.univer.qurbonlikofficial.ui.kg.EditSheepsByKgFragment"
+        android:label="EditSheepsByKgFragment"
+        tools:layout="@layout/fragment_edit_sheep_by_kg" />
 
 </navigation>

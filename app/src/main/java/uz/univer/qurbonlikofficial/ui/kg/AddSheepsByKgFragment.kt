@@ -2,6 +2,7 @@ package uz.univer.qurbonlikofficial.ui.kg
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -21,7 +22,26 @@ class AddSheepsByKgFragment : Fragment(R.layout.fragment_add_sheep_by_kg) {
         binding.apply {
             btnByKg.setOnClickListener {
                 saveSheep()
-                findNavController().popBackStack()
+            }
+        }
+        binding.paidAmmount.addTextChangedListener {
+            if (it.toString().isNotEmpty() && binding.sheepCost.text.toString()
+                    .isNotEmpty() && it.toString().toFloat() <= binding.sheepCost.text.toString()
+                    .toFloat()
+            ) {
+                binding.debt.text =
+                    (binding.sheepCost.text.toString().toFloat() - it.toString()
+                        .toFloat()).toInt().toString()
+            }
+        }
+        binding.sheepCost.addTextChangedListener {
+            if (it.toString().isNotEmpty() && binding.paidAmmount.text.toString()
+                    .isNotEmpty() && it.toString().toFloat() >= binding.paidAmmount.text.toString()
+                    .toFloat()
+            ) {
+                binding.debt.text =
+                    (it.toString().toFloat() - binding.paidAmmount.text.toString()
+                        .toFloat()).toInt().toString()
             }
         }
     }
@@ -33,27 +53,27 @@ class AddSheepsByKgFragment : Fragment(R.layout.fragment_add_sheep_by_kg) {
                 return
             }
             if (surname.text.toString().isEmpty()) {
-                name.setError("Харидор фамилиясини киритинг!")
+                surname.setError("Харидор фамилиясини киритинг!")
                 return
             }
             if (phone.unMaskedText.toString().length == 7) {
-                name.setError("Харидор телефон рақамини киритинг!")
+                phone.setError("Харидор телефон рақамини киритинг!")
                 return
             }
             if (sheepNumber.text.toString().isEmpty()) {
-                name.setError("Қўй рақамини киритинг!")
+                sheepNumber.setError("Қўй рақамини киритинг!")
                 return
             }
             if (sheepWeight.text.toString().isEmpty()) {
-                name.setError("Қўй оғирлигини киритинг!")
+                sheepWeight.setError("Қўй оғирлигини киритинг!")
                 return
             }
             if (sheepCost.text.toString().isEmpty()) {
-                name.setError("Қўй нархини киритинг!")
+                sheepCost.setError("Қўй нархини киритинг!")
                 return
             }
             if (paidAmmount.text.toString().isEmpty()) {
-                name.setError("Тўланган суммани киритинг!")
+                paidAmmount.setError("Тўланган суммани киритинг!")
                 return
             }
             if (debt.text.toString().isEmpty()) {
@@ -68,11 +88,12 @@ class AddSheepsByKgFragment : Fragment(R.layout.fragment_add_sheep_by_kg) {
                     phoneNumber = "998${phone.unMaskedText.toString()}",
                     sheepNumber = sheepNumber.text.toString(),
                     weight = sheepWeight.text.toString(),
-                    price = sheepCost.text.toString(),
-                    paidAmount = paidAmmount.text.toString(),
+                    price = sheepCost.text.toString().toFloat(),
+                    paidAmount = paidAmmount.text.toString().toFloat(),
                     debt = debt.text.toString().toFloat()
                 )
             )
+            findNavController().popBackStack()
         }
     }
 }

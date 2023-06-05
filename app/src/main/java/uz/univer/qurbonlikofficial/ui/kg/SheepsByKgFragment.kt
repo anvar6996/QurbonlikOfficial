@@ -21,6 +21,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import uz.univer.qurbonlikofficial.R
 import uz.univer.qurbonlikofficial.data.entity.SheepByKgDataEntity
+import uz.univer.qurbonlikofficial.data.model.StaticValues
 import uz.univer.qurbonlikofficial.databinding.FragmentSheepsByKgBinding
 import uz.univer.qurbonlikofficial.ui.adapter.SheepsByKgAdapter
 import uz.univer.qurbonlikofficial.ui.vm.MainViewModel
@@ -48,7 +49,7 @@ class SheepsByKgFragment : Fragment(R.layout.fragment_sheeps_by_kg) {
                 )
                 val fileUri: Uri = initiateSharing()
                 launchShareFileIntent(fileUri)
-            }else{
+            } else {
                 Toast.makeText(
                     requireContext(), "Малумотлар йўқ", Toast.LENGTH_SHORT
                 ).show()
@@ -88,6 +89,10 @@ class SheepsByKgFragment : Fragment(R.layout.fragment_sheeps_by_kg) {
                     )
                 )
             }
+        }
+        sheepsByKgAdapter.itemClickOpenListener {
+            StaticValues.sheepByKgDataEntity=it
+            findNavController().navigate(SheepsByKgFragmentDirections.actionSheepsByKgFragmentToEditSheepsByKgFragment())
         }
         binding.recyclerSheep.adapter = sheepsByKgAdapter
         viewModel.flowSheepsByKg.onEach {

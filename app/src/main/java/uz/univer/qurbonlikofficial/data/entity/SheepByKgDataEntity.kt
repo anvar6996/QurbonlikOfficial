@@ -11,7 +11,7 @@ data class SheepByKgDataEntity(
     val sheepNumber: String,
     val phoneNumber: String,
     val weight: String,
-    val price: String,
-    val paidAmount: String,
+    val price: Float,
+    val paidAmount: Float,
     val debt: Float,
 )

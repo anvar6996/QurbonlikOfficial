@@ -18,6 +18,7 @@ class SheepsByHeadAdapter :
     ListAdapter<SheepByHeadDataEntity, SheepsByHeadAdapter.EmployeeHolder>(Diff) {
     private var clickDelete: ((SheepByHeadDataEntity) -> Unit)? = null
     private var clickListener: ((SheepByHeadDataEntity) -> Unit)? = null
+    private var clickOpenListener: ((SheepByHeadDataEntity) -> Unit)? = null
     private var longClickListener: ((SheepByHeadDataEntity, Int, View) -> Unit)? = null
 
     inner class EmployeeHolder(private val binding: ItemSheepByHeadBinding) :
@@ -29,6 +30,11 @@ class SheepsByHeadAdapter :
                     getItem(bindingAdapterPosition), bindingAdapterPosition, binding.root
                 )
                 return@setOnLongClickListener true
+            }
+            binding.root.setOnClickListener {
+                clickOpenListener?.invoke(
+                    getItem(bindingAdapterPosition)
+                )
             }
         }
 
@@ -47,7 +53,11 @@ class SheepsByHeadAdapter :
                 NumberFormat.getNumberInstance(Locale.getDefault()).format(data.debt)
             binding.debt.text = "Қарз:${formattedNumber} сўм"
 
-            binding.debt.setTextColor(if (data.debt == 0.0f) Color.parseColor("#158C68") else Color.parseColor("#D0021B"))
+            binding.debt.setTextColor(
+                if (data.debt == 0.0f) Color.parseColor("#158C68") else Color.parseColor(
+                    "#D0021B"
+                )
+            )
         }
     }
 
@@ -81,6 +91,10 @@ class SheepsByHeadAdapter :
 
     fun itemClickListener(f: (SheepByHeadDataEntity) -> Unit) {
         clickListener = f
+    }
+
+    fun itemClickOpenListener(f: (SheepByHeadDataEntity) -> Unit) {
+        clickOpenListener = f
     }
 
     fun itemDeleteListener(f: (SheepByHeadDataEntity) -> Unit) {

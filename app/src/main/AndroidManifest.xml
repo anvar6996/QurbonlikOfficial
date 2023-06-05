@@ -11,9 +11,9 @@
         android:name=".app.App"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_app_qurbonlik"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_app_qurbonlik_round"
         android:supportsRtl="true"
         tools:targetApi="31">
         <provider

@@ -10,6 +10,7 @@ data class SheepByHeadDataEntity(
     val name: String,
     val surname: String,
     val phoneNumber: String,
-    val price: String,
+    val price: Float,
+    val paidAmmount: Float,
     val debt: Float,
 )

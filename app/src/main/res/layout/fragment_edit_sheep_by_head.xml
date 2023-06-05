@@ -18,37 +18,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="Килограммлаб сотиладиган қўй малумотларини киритиш"
+            android:text="Оёқлаб сотиладиган қўй малумотларини киритиш"
             android:textColor="@color/black"
             android:textSize="23sp" />
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="?android:actionBarSize"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/background_input"
-
-            app:boxStrokeWidth="0dp"
-            app:boxStrokeWidthFocused="0dp">
-
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/sheep_number"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="start|center"
-                android:hint="Қўй рақами"
-                android:imeOptions="actionGo"
-                android:inputType="number"
-                android:maxLines="1"
-                android:paddingStart="15dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/space_grey"
-                android:textSize="19sp"
-                tools:ignore="LabelFor" />
-
-        </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -127,40 +100,11 @@
                 android:importantForAutofill="no"
                 android:inputType="phone"
                 android:maxLines="1"
+                android:paddingStart="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/space_grey"
+                android:textSize="19sp"
                 app:mask="+998 (##) ###-##-##"
-                android:paddingStart="15dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/space_grey"
-                android:textSize="19sp"
-                tools:ignore="LabelFor" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="?android:actionBarSize"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/background_input"
-            android:textColorHint="@color/space_grey"
-            app:boxStrokeWidth="0dp"
-            app:boxStrokeWidthFocused="0dp">
-
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/sheep_weight"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="start|center"
-                android:hint="Қўй ўгирлиги"
-                android:imeOptions="actionGo"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:maxLines="1"
-                android:paddingStart="15dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/space_grey"
-                android:textSize="19sp"
                 tools:ignore="LabelFor" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -181,10 +125,10 @@
                 android:layout_height="match_parent"
                 android:gravity="start|center"
                 android:hint="Қўй нархи"
+                android:maxLength="9"
                 android:imeOptions="actionGo"
                 android:importantForAutofill="no"
                 android:inputType="number"
-                android:maxLength="9"
                 android:maxLines="1"
                 android:paddingStart="15dp"
                 android:textColor="@color/black"
@@ -193,6 +137,7 @@
                 tools:ignore="LabelFor" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -213,8 +158,8 @@
                 android:imeOptions="actionGo"
                 android:importantForAutofill="no"
                 android:inputType="number"
-                android:maxLines="1"
                 android:maxLength="9"
+                android:maxLines="1"
                 android:paddingStart="15dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/space_grey"
@@ -228,7 +173,6 @@
             android:layout_height="?android:actionBarSize"
             android:layout_marginTop="15dp"
             android:background="@drawable/background_input"
-            android:textColorHint="@color/redDark"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp">
 
@@ -243,7 +187,6 @@
                 android:importantForAutofill="no"
                 android:inputType="number"
                 android:maxLines="1"
-                android:maxLength="9"
                 android:paddingStart="15dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/space_grey"
@@ -268,7 +211,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_by_head" />
-
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

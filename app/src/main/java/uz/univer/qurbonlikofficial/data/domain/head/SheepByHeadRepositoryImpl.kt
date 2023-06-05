@@ -10,7 +10,7 @@ class SheepByHeadRepositoryImpl @Inject constructor(private val dao: SheepByHead
     SheepByHeadRepository {
 
     override fun getAllSheeps(): Flow<List<SheepByHeadDataEntity>> {
-        return dao.getSheeps("debt")
+        return dao.getSheeps()
     }
 
     override suspend fun getSheep(id: Long): SheepByHeadDataEntity {
