@@ -36,7 +36,7 @@ class SheepsByKgFragment : Fragment(R.layout.fragment_sheeps_by_kg) {
     private val binding by viewBinding(FragmentSheepsByKgBinding::bind)
     private val viewModel by viewModels<MainViewModel>()
     private val sheepsByKgAdapter = SheepsByKgAdapter()
-    private val listSheepsByKg = ArrayList<SheepByKgDataEntity>()
+    private var listSheepsByKg = ArrayList<SheepByKgDataEntity>()
     private val locationPermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
@@ -96,6 +96,7 @@ class SheepsByKgFragment : Fragment(R.layout.fragment_sheeps_by_kg) {
         }
         binding.recyclerSheep.adapter = sheepsByKgAdapter
         viewModel.flowSheepsByKg.onEach {
+            listSheepsByKg=it as ArrayList<SheepByKgDataEntity>
             sheepsByKgAdapter.submitList(it)
         }.launchIn(lifecycleScope)
 

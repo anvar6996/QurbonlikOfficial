@@ -53,6 +53,9 @@ public class ExcelHeadUtils {
         sheet.setColumnWidth(2, (15 * 400));
         sheet.setColumnWidth(3, (15 * 400));
         sheet.setColumnWidth(4, (15 * 400));
+        sheet.setColumnWidth(5, (15 * 400));
+        sheet.setColumnWidth(6, (15 * 400));
+        sheet.setColumnWidth(7, (15 * 400));
 
         setHeaderRow();
         fillDataIntoExcel(listSheepDataEntity);
@@ -94,15 +97,19 @@ public class ExcelHeadUtils {
 
             Row rowData = sheet.createRow(i + 1);
             cell = rowData.createCell(0);
-            cell.setCellValue(listSheepDataEntity.get(i).getSurname());
+            cell.setCellValue(listSheepDataEntity.get(i).getSheepNumber());
             cell = rowData.createCell(1);
-            cell.setCellValue(listSheepDataEntity.get(i).getName());
+            cell.setCellValue(listSheepDataEntity.get(i).getSurname());
             cell = rowData.createCell(2);
-            cell.setCellValue(listSheepDataEntity.get(i).getPhoneNumber());
+            cell.setCellValue(listSheepDataEntity.get(i).getName());
             cell = rowData.createCell(3);
-            cell.setCellValue(listSheepDataEntity.get(i).getDebt());
+            cell.setCellValue(listSheepDataEntity.get(i).getPhoneNumber());
             cell = rowData.createCell(4);
+            cell.setCellValue(listSheepDataEntity.get(i).getDebt());
+            cell = rowData.createCell(5);
             cell.setCellValue(listSheepDataEntity.get(i).getPrice());
+            cell = rowData.createCell(6);
+            cell.setCellValue(listSheepDataEntity.get(i).getPaidAmmount());
         }
     }
 

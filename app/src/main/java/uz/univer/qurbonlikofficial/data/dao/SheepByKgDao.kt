@@ -15,7 +15,7 @@ interface SheepByKgDao {
     @Query("SELECT * FROM sheepbykgdataentity ORDER BY debt DESC")
     fun getSheeps(): Flow<List<SheepByKgDataEntity>>
 
-    @Query("SELECT * FROM sheepbykgdataentity WHERE SheepByKgDataEntity.name LIKE :searchPattern OR  SheepByKgDataEntity.sheepNumber LIKE :searchPattern OR SheepByKgDataEntity.surname LIKE :searchPattern")
+    @Query("SELECT * FROM sheepbykgdataentity WHERE SheepByKgDataEntity.name LIKE :searchPattern OR  SheepByKgDataEntity.phoneNumber LIKE :searchPattern  OR  SheepByKgDataEntity.sheepNumber LIKE :searchPattern OR SheepByKgDataEntity.surname LIKE :searchPattern")
     fun searchUsers(searchPattern: String): Flow<List<SheepByKgDataEntity>>
 
     @Query("SELECT * FROM SheepByKgDataEntity WHERE id = :id")
