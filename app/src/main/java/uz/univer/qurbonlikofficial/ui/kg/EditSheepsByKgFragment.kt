@@ -2,7 +2,6 @@ package uz.univer.qurbonlikofficial.ui.kg
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -30,7 +29,7 @@ class EditSheepsByKgFragment : Fragment(R.layout.fragment_edit_sheep_by_kg) {
                 sheepWeight.setText(data.weight)
                 sheepCost.setText(data.price.toString())
                 paidAmmount.setText(data.paidAmount.toString())
-                debt.setText(data.debt.toString())
+                debt.text = data.debt.toString()
             }
         }
         binding.btnByKg.setOnClickListener {
@@ -38,24 +37,33 @@ class EditSheepsByKgFragment : Fragment(R.layout.fragment_edit_sheep_by_kg) {
         }
         binding.paidAmmount.addTextChangedListener {
             if (it.toString().isNotEmpty() && binding.sheepCost.text.toString()
-                    .isNotEmpty() && it.toString().toFloat() <= binding.sheepCost.text.toString()
-                    .toFloat()
+                    .isNotEmpty() && binding.sheepWeight.text.toString().isNotEmpty() && it.toString().toFloat() <= binding.sheepCost.text.toString().toFloat() * binding.sheepWeight.text.toString().toFloat()
             ) {
-//                && it.toString().toFloat() <= binding.sheepCost.text.toString()
-//                    .toFloat()
                 binding.debt.text =
-                    (binding.sheepCost.text.toString().toFloat() - it.toString()
+                    (binding.sheepCost.text.toString().toFloat() * binding.sheepWeight.text.toString().toFloat() - it.toString()
                         .toFloat()).toInt().toString()
             }
         }
         binding.sheepCost.addTextChangedListener {
             if (it.toString().isNotEmpty() && binding.paidAmmount.text.toString()
-                    .isNotEmpty() && it.toString().toFloat() >= binding.paidAmmount.text.toString()
-                    .toFloat()
+                    .isNotEmpty() && it.toString().toFloat()*binding.sheepWeight.text.toString().toFloat() >= binding.paidAmmount.text.toString()
+                    .toFloat() && binding.sheepWeight.text.toString().isNotEmpty()
             ) {
                 binding.debt.text =
-                    (it.toString().toFloat() - binding.paidAmmount.text.toString()
+                    (it.toString().toFloat()*binding.sheepWeight.text.toString().toFloat() - binding.paidAmmount.text.toString()
                         .toFloat()).toInt().toString()
+            }
+        }
+        binding.sheepWeight.addTextChangedListener {
+            if (it.toString().isNotEmpty() && binding.paidAmmount.text.toString()
+                    .isNotEmpty() && binding.sheepCost.text.toString()
+                    .isNotEmpty() && binding.paidAmmount.text.toString()
+                    .toFloat() <= binding.sheepCost.text.toString()
+                    .toFloat() * it.toString().toFloat()
+            ) {
+                binding.debt.text = (binding.sheepCost.text.toString()
+                    .toFloat() * it.toString().toFloat() - binding.paidAmmount.text.toString()
+                    .toFloat()).toInt().toString()
             }
         }
     }

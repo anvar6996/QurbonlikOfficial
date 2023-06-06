@@ -25,6 +25,7 @@ class EditSheepsByHeadFragment : Fragment(R.layout.fragment_edit_sheep_by_head) 
             StaticValues.sheepByHeadDataEntity.let { data ->
                 name.setText(data.name)
                 surname.setText(data.surname)
+                sheepNumber.setText(data.sheepNumber)
                 phone.setText(data.phoneNumber.substring(2, data.phoneNumber.length))
                 sheepCost.setText(data.price.toString())
                 paidAmmount.setText(data.paidAmmount.toString())
@@ -84,6 +85,7 @@ class EditSheepsByHeadFragment : Fragment(R.layout.fragment_edit_sheep_by_head) 
                 SheepByHeadDataEntity(
                     id = StaticValues.sheepByHeadDataEntity.id,
                     name = name.text.toString(),
+                    sheepNumber = sheepNumber.text.toString(),
                     surname = surname.text.toString(),
                     phoneNumber = "998${phone.unMaskedText.toString()}",
                     price = sheepCost.text.toString().toFloat(),

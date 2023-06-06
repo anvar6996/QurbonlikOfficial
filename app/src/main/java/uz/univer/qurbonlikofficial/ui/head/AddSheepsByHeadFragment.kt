@@ -25,7 +25,8 @@ class AddSheepsByHeadFragment : Fragment(R.layout.fragment_add_sheep_by_head) {
             }
             binding.paidAmmount.addTextChangedListener {
                 if (it.toString().isNotEmpty() && binding.sheepCost.text.toString()
-                        .isNotEmpty() && it.toString().toFloat() <= binding.sheepCost.text.toString()
+                        .isNotEmpty() && it.toString()
+                        .toFloat() <= binding.sheepCost.text.toString()
                         .toFloat()
                 ) {
                     binding.debt.text =
@@ -35,7 +36,8 @@ class AddSheepsByHeadFragment : Fragment(R.layout.fragment_add_sheep_by_head) {
             }
             binding.sheepCost.addTextChangedListener {
                 if (it.toString().isNotEmpty() && binding.paidAmmount.text.toString()
-                        .isNotEmpty() && it.toString().toFloat() >= binding.paidAmmount.text.toString()
+                        .isNotEmpty() && it.toString()
+                        .toFloat() >= binding.paidAmmount.text.toString()
                         .toFloat()
                 ) {
                     binding.debt.text =
@@ -81,6 +83,7 @@ class AddSheepsByHeadFragment : Fragment(R.layout.fragment_add_sheep_by_head) {
                 SheepByHeadDataEntity(
                     id = 0,
                     name = name.text.toString(),
+                    sheepNumber = sheepNumber.text.toString(),
                     surname = surname.text.toString(),
                     phoneNumber = "998${phone.unMaskedText.toString()}",
                     price = sheepCost.text.toString().toFloat(),

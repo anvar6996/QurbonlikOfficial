@@ -152,7 +152,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="start|center"
-                android:hint="Қўй ўгирлиги"
+                android:hint="Қўй огирлиги"
                 android:imeOptions="actionGo"
                 android:importantForAutofill="no"
                 android:inputType="number"

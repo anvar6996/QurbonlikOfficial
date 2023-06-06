@@ -26,22 +26,33 @@ class AddSheepsByKgFragment : Fragment(R.layout.fragment_add_sheep_by_kg) {
         }
         binding.paidAmmount.addTextChangedListener {
             if (it.toString().isNotEmpty() && binding.sheepCost.text.toString()
-                    .isNotEmpty() && it.toString().toFloat() <= binding.sheepCost.text.toString()
-                    .toFloat()
+                    .isNotEmpty() && binding.sheepWeight.text.toString().isNotEmpty() && it.toString().toFloat() <= binding.sheepCost.text.toString().toFloat() * binding.sheepWeight.text.toString().toFloat()
             ) {
                 binding.debt.text =
-                    (binding.sheepCost.text.toString().toFloat() - it.toString()
+                    (binding.sheepCost.text.toString().toFloat() * binding.sheepWeight.text.toString().toFloat() - it.toString()
                         .toFloat()).toInt().toString()
             }
         }
         binding.sheepCost.addTextChangedListener {
             if (it.toString().isNotEmpty() && binding.paidAmmount.text.toString()
-                    .isNotEmpty() && it.toString().toFloat() >= binding.paidAmmount.text.toString()
-                    .toFloat()
+                    .isNotEmpty() && it.toString().toFloat()*binding.sheepWeight.text.toString().toFloat() >= binding.paidAmmount.text.toString()
+                    .toFloat() && binding.sheepWeight.text.toString().isNotEmpty()
             ) {
                 binding.debt.text =
-                    (it.toString().toFloat() - binding.paidAmmount.text.toString()
+                    (it.toString().toFloat()*binding.sheepWeight.text.toString().toFloat() - binding.paidAmmount.text.toString()
                         .toFloat()).toInt().toString()
+            }
+        }
+        binding.sheepWeight.addTextChangedListener {
+            if (it.toString().isNotEmpty() && binding.paidAmmount.text.toString()
+                    .isNotEmpty() && binding.sheepCost.text.toString()
+                    .isNotEmpty() && binding.paidAmmount.text.toString()
+                    .toFloat() <= binding.sheepCost.text.toString()
+                    .toFloat() * it.toString().toFloat()
+            ) {
+                binding.debt.text = (binding.sheepCost.text.toString()
+                    .toFloat() * it.toString().toFloat() - binding.paidAmmount.text.toString()
+                    .toFloat()).toInt().toString()
             }
         }
     }

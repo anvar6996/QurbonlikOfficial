@@ -23,6 +23,32 @@
             android:textSize="23sp" />
 
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/background_input"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp">
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/sheep_number"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="start|center"
+                android:hint="Қўй рақами"
+                android:imeOptions="actionGo"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:paddingStart="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/space_grey"
+                android:textSize="19sp"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"

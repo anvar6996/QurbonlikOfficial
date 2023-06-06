@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class SheepByHeadDataEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
+    val sheepNumber: String,
     val name: String,
     val surname: String,
     val phoneNumber: String,

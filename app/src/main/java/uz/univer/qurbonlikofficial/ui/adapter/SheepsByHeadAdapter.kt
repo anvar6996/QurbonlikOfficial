@@ -42,6 +42,7 @@ class SheepsByHeadAdapter :
             binding.name.text = data.name.ifEmpty { "" }
             binding.phone.text = data.phoneNumber
             binding.indicator.setImageResource(if (data.debt == 0.0f) R.drawable.bg_paid else R.drawable.bg_debt)
+            binding.number.text = "Қўй рақами:${data.sheepNumber.ifEmpty { "" }}"
             binding.delete.setOnClickListener {
                 clickDelete?.invoke(data)
                 notifyItemRemoved(absoluteAdapterPosition)
