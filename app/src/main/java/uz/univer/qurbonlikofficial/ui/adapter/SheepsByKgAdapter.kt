@@ -1,6 +1,7 @@
 package uz.univer.qurbonlikofficial.ui.adapter
 
 import android.graphics.Color
+import android.text.TextUtils.replace
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,7 +53,7 @@ class SheepsByKgAdapter : ListAdapter<SheepByKgDataEntity, SheepsByKgAdapter.Emp
                 clickListener?.invoke(data)
             }
             val formattedNumber =
-                NumberFormat.getNumberInstance(Locale.getDefault()).format(data.debt)
+                NumberFormat.getNumberInstance(Locale.getDefault()).format(data.debt).toString()
             binding.debt.text = "Қарз:${formattedNumber} сўм"
             binding.debt.setTextColor(if (data.debt == 0.0f) Color.parseColor("#158C68") else Color.parseColor("#D0021B"))
 

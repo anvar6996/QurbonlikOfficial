@@ -21,7 +21,8 @@ class MainViewModel @Inject constructor(
 
     val flowSheepsByKg = MutableSharedFlow<List<SheepByKgDataEntity>>()
     val flowSheepsByHead = MutableSharedFlow<List<SheepByHeadDataEntity>>()
-    val successAdd = MutableSharedFlow<Boolean>()
+    val successAdd = MutableSharedFlow<String>()
+    val errorAdd = MutableSharedFlow<String>()
 
 
     fun deleteByKgSheep(sheepDataEntity: SheepByKgDataEntity) {
@@ -38,13 +39,33 @@ class MainViewModel @Inject constructor(
 
     fun updateByKgSheep(sheepDataEntity: SheepByKgDataEntity) {
         viewModelScope.launch {
-            repositoryKg.updateSheep(sheepDataEntity)
+            repositoryKg.getAllSheeps().onEach {
+                val checkList = it.filter { data ->
+                    data.sheepNumber == sheepDataEntity.sheepNumber && data.id != sheepDataEntity.id
+                }
+                if (checkList.isEmpty()) {
+                    repositoryKg.updateSheep(sheepDataEntity)
+                    successAdd.emit("Кўй малумотлари узгартирилди")
+                } else {
+                    errorAdd.emit("Бундай ракамли куй мавжуд")
+                }
+            }.launchIn(viewModelScope)
         }
     }
 
     fun updateByHeadSheep(sheepDataEntity: SheepByHeadDataEntity) {
         viewModelScope.launch {
-            repositoryHead.updateSheep(sheepDataEntity)
+            repositoryHead.getAllSheeps().onEach {
+                val checkList = it.filter { data ->
+                    data.sheepNumber == sheepDataEntity.sheepNumber && data.id != sheepDataEntity.id
+                }
+                if (checkList.isEmpty()) {
+                    repositoryHead.updateSheep(sheepDataEntity)
+                    successAdd.emit("Кўй малумотлари узгартирилди")
+                } else {
+                    errorAdd.emit("Бундай ракамли кўй мавжуд")
+                }
+            }.launchIn(viewModelScope)
         }
     }
 
@@ -82,13 +103,33 @@ class MainViewModel @Inject constructor(
 
     fun addSheepByKg(sheepDataEntity: SheepByKgDataEntity) {
         viewModelScope.launch {
-            repositoryKg.addSheep(sheepDataEntity)
+            repositoryKg.getAllSheeps().onEach {
+                val checkList = it.filter { data ->
+                    data.sheepNumber == sheepDataEntity.sheepNumber
+                }
+                if (checkList.isEmpty()) {
+                    repositoryKg.addSheep(sheepDataEntity)
+                    successAdd.emit("Куй кушилди")
+                } else {
+                    errorAdd.emit("Бундай ракамли куй мавжуд")
+                }
+            }.launchIn(viewModelScope)
         }
     }
 
     fun addSheepByHead(sheepDataEntity: SheepByHeadDataEntity) {
         viewModelScope.launch {
-            repositoryHead.addSheep(sheepDataEntity)
+            repositoryHead.getAllSheeps().onEach {
+                val checkList = it.filter { data ->
+                    data.sheepNumber == sheepDataEntity.sheepNumber
+                }
+                if (checkList.isEmpty()) {
+                    repositoryHead.addSheep(sheepDataEntity)
+                    successAdd.emit("Куй кушилди")
+                } else {
+                    errorAdd.emit("Бундай ракамли куй мавжуд")
+                }
+            }.launchIn(viewModelScope)
         }
     }
 

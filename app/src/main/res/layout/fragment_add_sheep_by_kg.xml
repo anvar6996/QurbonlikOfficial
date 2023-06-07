@@ -232,18 +232,17 @@
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp">
 
-
-            <TextView
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/debt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="start|center"
                 android:hint="Қарзи"
+                android:enabled="false"
                 android:imeOptions="actionGo"
                 android:importantForAutofill="no"
                 android:inputType="number"
                 android:maxLines="1"
-                android:maxLength="9"
                 android:paddingStart="15dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/space_grey"

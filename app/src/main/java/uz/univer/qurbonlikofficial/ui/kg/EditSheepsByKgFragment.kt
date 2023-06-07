@@ -1,18 +1,25 @@
 package uz.univer.qurbonlikofficial.ui.kg
 
 import android.os.Bundle
+import android.text.TextUtils.replace
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import uz.univer.qurbonlikofficial.R
 import uz.univer.qurbonlikofficial.data.entity.SheepByKgDataEntity
 import uz.univer.qurbonlikofficial.data.model.StaticValues
 import uz.univer.qurbonlikofficial.databinding.FragmentEditSheepByKgBinding
 import uz.univer.qurbonlikofficial.ui.vm.MainViewModel
+import uz.univer.qurbonlikofficial.utils.date.showToast
+import java.text.NumberFormat
+import java.util.Locale
 
 @AndroidEntryPoint
 class EditSheepsByKgFragment : Fragment(R.layout.fragment_edit_sheep_by_kg) {
@@ -21,15 +28,20 @@ class EditSheepsByKgFragment : Fragment(R.layout.fragment_edit_sheep_by_kg) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
+            val numberFormat = NumberFormat.getNumberInstance(Locale.getDefault())
             StaticValues.sheepByKgDataEntity.let { data ->
                 name.setText(data.name)
                 sheepNumber.setText(data.sheepNumber)
                 surname.setText(data.surname)
                 phone.setText(data.phoneNumber.substring(2, data.phoneNumber.length))
                 sheepWeight.setText(data.weight)
-                sheepCost.setText(data.price.toString())
-                paidAmmount.setText(data.paidAmount.toString())
-                debt.text = data.debt.toString()
+
+                val formattedCost = numberFormat.format(data.price)
+                val formattedAmmount = numberFormat.format(data.paidAmount)
+                val formattedDebt = numberFormat.format(data.debt)
+                sheepCost.setText(formattedCost.toString().trim().replace("\\p{Zs}+".toRegex(),""))
+                paidAmmount.setText(formattedAmmount.toString().trim().replace("\\p{Zs}+".toRegex(),""))
+                debt.setText(formattedDebt.toString().trim().replace("\\p{Zs}+".toRegex(),""))
             }
         }
         binding.btnByKg.setOnClickListener {
@@ -37,21 +49,28 @@ class EditSheepsByKgFragment : Fragment(R.layout.fragment_edit_sheep_by_kg) {
         }
         binding.paidAmmount.addTextChangedListener {
             if (it.toString().isNotEmpty() && binding.sheepCost.text.toString()
-                    .isNotEmpty() && binding.sheepWeight.text.toString().isNotEmpty() && it.toString().toFloat() <= binding.sheepCost.text.toString().toFloat() * binding.sheepWeight.text.toString().toFloat()
+                    .isNotEmpty() && binding.sheepWeight.text.toString()
+                    .isNotEmpty() && it.toString().toFloat() <= binding.sheepCost.text.toString()
+                    .toFloat() * binding.sheepWeight.text.toString().toFloat()
             ) {
-                binding.debt.text =
-                    (binding.sheepCost.text.toString().toFloat() * binding.sheepWeight.text.toString().toFloat() - it.toString()
+                binding.debt.setText(
+                    (binding.sheepCost.text.toString()
+                        .toFloat() * binding.sheepWeight.text.toString().toFloat() - it.toString()
                         .toFloat()).toInt().toString()
+                )
             }
         }
         binding.sheepCost.addTextChangedListener {
             if (it.toString().isNotEmpty() && binding.paidAmmount.text.toString()
-                    .isNotEmpty() && it.toString().toFloat()*binding.sheepWeight.text.toString().toFloat() >= binding.paidAmmount.text.toString()
+                    .isNotEmpty() && it.toString().toFloat() * binding.sheepWeight.text.toString()
+                    .toFloat() >= binding.paidAmmount.text.toString()
                     .toFloat() && binding.sheepWeight.text.toString().isNotEmpty()
             ) {
-                binding.debt.text =
-                    (it.toString().toFloat()*binding.sheepWeight.text.toString().toFloat() - binding.paidAmmount.text.toString()
+                binding.debt.setText(
+                    (it.toString().toFloat() * binding.sheepWeight.text.toString()
+                        .toFloat() - binding.paidAmmount.text.toString()
                         .toFloat()).toInt().toString()
+                )
             }
         }
         binding.sheepWeight.addTextChangedListener {
@@ -61,11 +80,26 @@ class EditSheepsByKgFragment : Fragment(R.layout.fragment_edit_sheep_by_kg) {
                     .toFloat() <= binding.sheepCost.text.toString()
                     .toFloat() * it.toString().toFloat()
             ) {
-                binding.debt.text = (binding.sheepCost.text.toString()
-                    .toFloat() * it.toString().toFloat() - binding.paidAmmount.text.toString()
-                    .toFloat()).toInt().toString()
+                binding.debt.setText(
+                    (binding.sheepCost.text.toString()
+                        .toFloat() * it.toString().toFloat() - binding.paidAmmount.text.toString()
+                        .toFloat()).toInt().toString()
+                )
             }
         }
+        initObserver()
+    }
+
+    private fun initObserver() {
+        viewModel.successAdd.onEach {
+            showToast(it)
+            findNavController().popBackStack()
+        }.launchIn(lifecycleScope)
+
+        viewModel.errorAdd.onEach {
+            showToast(it)
+            binding.sheepNumber.setError("Бундай ракамли кўй мавжуд")
+        }.launchIn(lifecycleScope)
     }
 
     private fun saveSheep() {
@@ -115,7 +149,6 @@ class EditSheepsByKgFragment : Fragment(R.layout.fragment_edit_sheep_by_kg) {
                     debt = debt.text.toString().toFloat()
                 )
             )
-            findNavController().popBackStack()
         }
     }
 }

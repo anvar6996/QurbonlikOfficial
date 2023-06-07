@@ -33,4 +33,8 @@ class SheepByHeadRepositoryImpl @Inject constructor(private val dao: SheepByHead
         dao.insertSheep(sheepDataEntity)
     }
 
+    override suspend fun checkSheepKg(sheepDataEntity: SheepByHeadDataEntity): SheepByHeadDataEntity? {
+        return dao.checkSheepKg(sheepDataEntity.sheepNumber)
+    }
+
 }

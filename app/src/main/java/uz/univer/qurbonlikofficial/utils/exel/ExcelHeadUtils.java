@@ -94,7 +94,6 @@ public class ExcelHeadUtils {
 
     private static void fillDataIntoExcel(ArrayList<SheepByHeadDataEntity> listSheepDataEntity) {
         for (int i = 0; i < listSheepDataEntity.size(); i++) {
-
             Row rowData = sheet.createRow(i + 1);
             cell = rowData.createCell(0);
             cell.setCellValue(listSheepDataEntity.get(i).getSheepNumber());
@@ -105,11 +104,11 @@ public class ExcelHeadUtils {
             cell = rowData.createCell(3);
             cell.setCellValue(listSheepDataEntity.get(i).getPhoneNumber());
             cell = rowData.createCell(4);
-            cell.setCellValue(listSheepDataEntity.get(i).getDebt());
-            cell = rowData.createCell(5);
             cell.setCellValue(listSheepDataEntity.get(i).getPrice());
-            cell = rowData.createCell(6);
+            cell = rowData.createCell(5);
             cell.setCellValue(listSheepDataEntity.get(i).getPaidAmmount());
+            cell = rowData.createCell(6);
+            cell.setCellValue(listSheepDataEntity.get(i).getDebt());
         }
     }
 

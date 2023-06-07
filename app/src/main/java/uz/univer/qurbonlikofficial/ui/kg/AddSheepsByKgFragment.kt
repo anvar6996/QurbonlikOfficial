@@ -5,13 +5,17 @@ import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import uz.univer.qurbonlikofficial.R
 import uz.univer.qurbonlikofficial.data.entity.SheepByKgDataEntity
 import uz.univer.qurbonlikofficial.databinding.FragmentAddSheepByKgBinding
 import uz.univer.qurbonlikofficial.ui.vm.MainViewModel
+import uz.univer.qurbonlikofficial.utils.date.showToast
 
 @AndroidEntryPoint
 class AddSheepsByKgFragment : Fragment(R.layout.fragment_add_sheep_by_kg) {
@@ -28,9 +32,9 @@ class AddSheepsByKgFragment : Fragment(R.layout.fragment_add_sheep_by_kg) {
             if (it.toString().isNotEmpty() && binding.sheepCost.text.toString()
                     .isNotEmpty() && binding.sheepWeight.text.toString().isNotEmpty() && it.toString().toFloat() <= binding.sheepCost.text.toString().toFloat() * binding.sheepWeight.text.toString().toFloat()
             ) {
-                binding.debt.text =
+                binding.debt.setText(
                     (binding.sheepCost.text.toString().toFloat() * binding.sheepWeight.text.toString().toFloat() - it.toString()
-                        .toFloat()).toInt().toString()
+                        .toFloat()).toInt().toString())
             }
         }
         binding.sheepCost.addTextChangedListener {
@@ -38,9 +42,9 @@ class AddSheepsByKgFragment : Fragment(R.layout.fragment_add_sheep_by_kg) {
                     .isNotEmpty() && it.toString().toFloat()*binding.sheepWeight.text.toString().toFloat() >= binding.paidAmmount.text.toString()
                     .toFloat() && binding.sheepWeight.text.toString().isNotEmpty()
             ) {
-                binding.debt.text =
+                binding.debt.setText(
                     (it.toString().toFloat()*binding.sheepWeight.text.toString().toFloat() - binding.paidAmmount.text.toString()
-                        .toFloat()).toInt().toString()
+                        .toFloat()).toInt().toString())
             }
         }
         binding.sheepWeight.addTextChangedListener {
@@ -50,13 +54,25 @@ class AddSheepsByKgFragment : Fragment(R.layout.fragment_add_sheep_by_kg) {
                     .toFloat() <= binding.sheepCost.text.toString()
                     .toFloat() * it.toString().toFloat()
             ) {
-                binding.debt.text = (binding.sheepCost.text.toString()
+                binding.debt.setText((binding.sheepCost.text.toString()
                     .toFloat() * it.toString().toFloat() - binding.paidAmmount.text.toString()
-                    .toFloat()).toInt().toString()
+                    .toFloat()).toInt().toString())
             }
         }
+        initObserver()
     }
 
+    private fun initObserver() {
+        viewModel.successAdd.onEach {
+            showToast(it)
+            findNavController().popBackStack()
+        }.launchIn(lifecycleScope)
+
+        viewModel.errorAdd.onEach {
+            showToast(it)
+            binding.sheepNumber.setError("Бундай ракамли кўй мавжуд")
+        }.launchIn(lifecycleScope)
+    }
     private fun saveSheep() {
         binding.apply {
             if (name.text.toString().isEmpty()) {
@@ -104,7 +120,6 @@ class AddSheepsByKgFragment : Fragment(R.layout.fragment_add_sheep_by_kg) {
                     debt = debt.text.toString().toFloat()
                 )
             )
-            findNavController().popBackStack()
         }
     }
 }

@@ -202,12 +202,13 @@
             app:boxStrokeWidthFocused="0dp">
 
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/debt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="start|center"
                 android:hint="Қарзи"
+                android:enabled="false"
                 android:imeOptions="actionGo"
                 android:importantForAutofill="no"
                 android:inputType="number"

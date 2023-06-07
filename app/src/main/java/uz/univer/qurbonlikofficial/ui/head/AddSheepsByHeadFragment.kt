@@ -2,16 +2,21 @@ package uz.univer.qurbonlikofficial.ui.head
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import uz.univer.qurbonlikofficial.R
 import uz.univer.qurbonlikofficial.data.entity.SheepByHeadDataEntity
 import uz.univer.qurbonlikofficial.databinding.FragmentAddSheepByHeadBinding
 import uz.univer.qurbonlikofficial.ui.vm.MainViewModel
+import uz.univer.qurbonlikofficial.utils.date.showToast
 
 @AndroidEntryPoint
 class AddSheepsByHeadFragment : Fragment(R.layout.fragment_add_sheep_by_head) {
@@ -26,26 +31,36 @@ class AddSheepsByHeadFragment : Fragment(R.layout.fragment_add_sheep_by_head) {
             binding.paidAmmount.addTextChangedListener {
                 if (it.toString().isNotEmpty() && binding.sheepCost.text.toString()
                         .isNotEmpty() && it.toString()
-                        .toFloat() <= binding.sheepCost.text.toString()
-                        .toFloat()
+                        .toFloat() <= binding.sheepCost.text.toString().toFloat()
                 ) {
-                    binding.debt.text =
-                        (binding.sheepCost.text.toString().toFloat() - it.toString()
-                            .toFloat()).toInt().toString()
+                    binding.debt.setText((binding.sheepCost.text.toString().toFloat() - it.toString()
+                        .toFloat()).toInt().toString())
                 }
             }
             binding.sheepCost.addTextChangedListener {
                 if (it.toString().isNotEmpty() && binding.paidAmmount.text.toString()
                         .isNotEmpty() && it.toString()
-                        .toFloat() >= binding.paidAmmount.text.toString()
-                        .toFloat()
+                        .toFloat() >= binding.paidAmmount.text.toString().toFloat()
                 ) {
-                    binding.debt.text =
+                    binding.debt.setText(
                         (it.toString().toFloat() - binding.paidAmmount.text.toString()
-                            .toFloat()).toInt().toString()
+                            .toFloat()).toInt().toString())
                 }
             }
+            initObserver()
         }
+    }
+
+    private fun initObserver() {
+        viewModel.successAdd.onEach {
+            showToast(it)
+            findNavController().popBackStack()
+        }.launchIn(lifecycleScope)
+
+        viewModel.errorAdd.onEach {
+            showToast(it)
+            binding.sheepNumber.setError("Бундай ракамли кўй мавжуд")
+        }.launchIn(lifecycleScope)
     }
 
     private fun saveSheep() {
@@ -91,7 +106,7 @@ class AddSheepsByHeadFragment : Fragment(R.layout.fragment_add_sheep_by_head) {
                     debt = debt.text.toString().toFloat()
                 )
             )
-            findNavController().popBackStack()
         }
     }
+
 }

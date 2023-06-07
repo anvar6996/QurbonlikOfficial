@@ -54,6 +54,7 @@ public class ExcelKgUtils {
         sheet.setColumnWidth(3, (15 * 400));
         sheet.setColumnWidth(4, (15 * 400));
         sheet.setColumnWidth(5, (15 * 400));
+        sheet.setColumnWidth(6, (15 * 400));
         setHeaderRow();
         fillDataIntoExcel(listSheepDataEntity);
         isWorkbookWrittenIntoStorage = storeExcelInStorage(context, fileName);
@@ -96,17 +97,18 @@ public class ExcelKgUtils {
 
             Row rowData = sheet.createRow(i + 1);
             cell = rowData.createCell(0);
-//                cell = rowData.createCell(1);
             cell.setCellValue(listSheepDataEntity.get(i).getSheepNumber());
             cell = rowData.createCell(1);
-            cell.setCellValue(listSheepDataEntity.get(i).getName() + " " + listSheepDataEntity.get(i).getSurname());
+            cell.setCellValue(listSheepDataEntity.get(i).getSurname());
             cell = rowData.createCell(2);
-            cell.setCellValue(listSheepDataEntity.get(i).getPhoneNumber());
+            cell.setCellValue(listSheepDataEntity.get(i).getName());
             cell = rowData.createCell(3);
-            cell.setCellValue(listSheepDataEntity.get(i).getWeight());
+            cell.setCellValue(listSheepDataEntity.get(i).getPhoneNumber());
             cell = rowData.createCell(4);
-            cell.setCellValue(listSheepDataEntity.get(i).getPaidAmount());
+            cell.setCellValue(listSheepDataEntity.get(i).getPrice());
             cell = rowData.createCell(5);
+            cell.setCellValue(listSheepDataEntity.get(i).getPaidAmount());
+            cell = rowData.createCell(6);
             cell.setCellValue(listSheepDataEntity.get(i).getDebt());
         }
     }

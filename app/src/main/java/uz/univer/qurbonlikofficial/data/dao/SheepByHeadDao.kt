@@ -8,11 +8,15 @@ import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 import uz.univer.qurbonlikofficial.data.entity.SheepByHeadDataEntity
+import uz.univer.qurbonlikofficial.data.entity.SheepByKgDataEntity
 
 @Dao
 interface SheepByHeadDao {
     @Query("SELECT * FROM sheepbyheaddataentity  ORDER BY debt DESC")
     fun getSheeps(): Flow<List<SheepByHeadDataEntity>>
+
+    @Query("SELECT * FROM sheepbykgdataentity WHERE sheepNumber =:newSheepNumber")
+    fun checkSheepKg(newSheepNumber: String): SheepByHeadDataEntity?
 
     @Query("SELECT * FROM sheepbyheaddataentity WHERE SheepByHeadDataEntity.name LIKE :searchPattern  OR SheepByHeadDataEntity.sheepNumber LIKE :searchPattern  OR SheepByHeadDataEntity.phoneNumber LIKE :searchPattern  OR  SheepByHeadDataEntity.surname LIKE :searchPattern ")
     fun searchUsers(searchPattern: String): Flow<List<SheepByHeadDataEntity>>
